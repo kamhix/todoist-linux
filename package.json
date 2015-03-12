@@ -1,0 +1,30 @@
+{
+  "name": "Todoist",
+  "version": "0.0.1",
+  "description": "A Linux desktop client for todoist",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "to-do",
+    "task",
+    "todoist",
+    "linux"
+  ],
+  "single-instance": true,
+  "window": {
+    "title": "Todoist",
+    "toolbar": false,
+    "position": "center",
+    "width": 800,
+    "height": 600,
+    "icon": "assets/icon.png"
+  },
+  "webkit": {
+    "page-cache": true
+  },
+  "author": "kamhix",
+  "license": "BSD"
+}

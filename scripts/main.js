@@ -2,34 +2,33 @@ var gui = require('nw.gui');
 var view = document.getElementById('view');
 var loader = document.querySelector('.loader');
 
+var checkLink = function (e) {
+  var link;
+
+  if (e.target.nodeName === 'A') {
+    link = e.target;
+  } else if (e.target.parentNode.nodeName === 'A') {
+    link = e.target.parentNode;
+  }
+  
+
+  if (link && link.href !=='' && !link.href.endsWith('#') && 
+      !link.href.startsWith('https://todoist.com/app')) {
+    e.preventDefault();
+    gui.Shell.openExternal(link.href);    
+  }
+};
+
 var redirectLink = function (winFrame) {
   
   var links = winFrame.document.querySelectorAll('a');
   
-  // window.alert(links.length);
-
-  for (var i = 0; i < links.length; i++) {
-    var link = links[i];
-
-    if (link.href === '' || link.href.charAt(link.href.length - 1) === '#') {
-      continue;
-    }
-
-    var oldOnclick = link.onclick;
-
-    link.onclick = function (e) {
-      e.preventDefault();
-      gui.Shell.openExternal(this.href);
-    };
-  }
+  winFrame.addEventListener('click', checkLink);
 };
 
 view.addEventListener('load', function () {
-  
   var winFrame = this.contentWindow;
 
-  // window.alert(winFrame.location.href);
-  
   if (winFrame.location.href === 'https://todoist.com/seeYou') {
     winFrame.location.href = 'https://todoist.com/app';
   } else {
@@ -38,11 +37,9 @@ view.addEventListener('load', function () {
   
   winFrame.onbeforeunload = function(e) {
     loader.className = 'loader';
-    // return winFrame.location.href + " # " + winFrame.document.referrer + " # " + winFrame.document.activeElement.href;
   };
   
-  winFrame.redirectToGoogle = function () {
-    
+  winFrame.redirectToGoogle = function () {  
     var state = {
         "success_page": "",
         "csrf": "b8ed60fe23914a3d9564e1d57a65d666",
@@ -78,6 +75,7 @@ view.addEventListener('load', function () {
       var oldHref = window.location.href;
     
       var win = gui.Window.open(url, {
+        toolbar: false,
         position: 'center',
         title: title,
         width: w,
@@ -94,8 +92,3 @@ view.addEventListener('load', function () {
   
   redirectLink(winFrame);
 });
-  
-
-window.onload = function () {
-
-};

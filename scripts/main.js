@@ -1,4 +1,6 @@
 var gui = require('nw.gui');
+var mainWindow = gui.Window.get();
+
 var view = document.getElementById('view');
 var loader = document.querySelector('.loader');
 
@@ -10,23 +12,24 @@ var checkLink = function (e) {
   } else if (e.target.parentNode.nodeName === 'A') {
     link = e.target.parentNode;
   }
-  
 
-  if (link && link.href !=='' && !link.href.endsWith('#') && 
+
+  if (link && link.href !=='' && !link.href.endsWith('#') &&
       !link.href.startsWith('https://todoist.com/app')) {
     e.preventDefault();
-    gui.Shell.openExternal(link.href);    
+    gui.Shell.openExternal(link.href);
   }
 };
 
 var redirectLink = function (winFrame) {
-  
+
   var links = winFrame.document.querySelectorAll('a');
-  
+
   winFrame.addEventListener('click', checkLink);
 };
 
 view.addEventListener('load', function () {
+
   var winFrame = this.contentWindow;
 
   if (winFrame.location.href === 'https://todoist.com/seeYou') {
@@ -34,23 +37,23 @@ view.addEventListener('load', function () {
   } else {
     loader.className = 'loader hide';
   }
-  
+
   winFrame.onbeforeunload = function(e) {
     loader.className = 'loader';
   };
-  
-  winFrame.redirectToGoogle = function () {  
+
+  winFrame.redirectToGoogle = function () {
     var state = {
         "success_page": "",
         "csrf": "b8ed60fe23914a3d9564e1d57a65d666",
         "inline": 0,
         "connect": 0
     };
-    
+
     state = encodeURIComponent(JSON.stringify(state));
-    
+
     var origin = winFrame.location.origin;
-    
+
     if(!origin) {
         origin = location.protocol + "//" + winFrame.location.hostname + (winFrame.location.port ? ':' + winFrame.location.port: '');
     }
@@ -66,14 +69,14 @@ view.addEventListener('load', function () {
                'client_id=600979030768-7o35cjq1gv138e22oj0j39u0bp0mn3hj.apps.googleusercontent.com';
 
     winFrame.popup(href, 'Google Authentication', 450, 550);
-    
+
     return false;
   }
-  
+
   winFrame.popup = function (url, title, w, h) {
-    
+
       var oldHref = window.location.href;
-    
+
       var win = gui.Window.open(url, {
         toolbar: false,
         position: 'center',
@@ -81,14 +84,20 @@ view.addEventListener('load', function () {
         width: w,
         height: h
       });
-    
+
       win.on('close', function() {
         this.hide();
-        window.location.href = oldHref; 
+        this.close();
+        window.location.href = oldHref;
       });
 
       return win;
   }
-  
+
   redirectLink(winFrame);
+});
+
+mainWindow.on('close', function() {
+  this.hide();
+  this.close(true);
 });

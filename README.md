@@ -2,8 +2,11 @@
 
 ## What is it ?
 
-Todoist Linux is a desktop application of Todoist.
-It provides Linux users access to the Todoist without using a web browser.  
+Todoist Linux is an unofficial desktop application of Todoist.
+It provides Linux users access to the Todoist without using a web browser.
+It offers every features of the web version of Todoist including notifications.
+It use nwjs to embed the web version in a window container and
+some scripts to improve the user experience (Ex: Loader).
 
 ## Download
 

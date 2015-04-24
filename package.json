@@ -25,6 +25,6 @@
   "webkit": {
     "page-cache": true
   },
-  "author": "kamhix",
-  "license": "BSD"
+  "author": "kamhix <kimly02@gmail.com",
+  "license": "MIT"
 }

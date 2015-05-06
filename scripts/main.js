@@ -1,6 +1,16 @@
 var gui = require('nw.gui');
 var mainWindow = gui.Window.get();
 
+var tray = new gui.Tray({ title: 'Todoist', icon: 'assets/icon.png' });
+
+var menu = new gui.Menu();
+var exitItem = new gui.MenuItem({ type: 'normal', label: 'Exit' });
+menu.append(exitItem);
+tray.menu = menu;
+
+var window_minimized = false;
+var window_hidden = false;
+
 var view = document.getElementById('view');
 var loader = document.querySelector('.loader');
 
@@ -97,7 +107,32 @@ view.addEventListener('load', function () {
   redirectLink(winFrame);
 });
 
+tray.on('click', function() {
+  if(window_minimized) {
+    mainWindow.restore();
+    window_minimized = false;
+  }
+  else if(window_hidden) {
+    mainWindow.show();
+    window_hidden = false;
+  }
+  else {
+    mainWindow.focus();
+  }
+});
+
+mainWindow.on('minimize', function() {
+  window_minimized = true;
+});
+
 mainWindow.on('close', function() {
   this.hide();
-  this.close(true);
+  window_hidden = true;
 });
+
+exitItem.click = function() {
+  if(!window_hidden) {
+    mainWindow.hide();
+  }
+  mainWindow.close(true);
+};

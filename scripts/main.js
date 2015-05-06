@@ -114,13 +114,14 @@ changeWindowState = function() {
   if(window_minimized) {
     mainWindow.restore();
     window_minimized = false;
+    window_blurred = false; // when minimizing a window, also blur is called --> needs reversing
   }
   else if(window_hidden) {
     mainWindow.show();
     window_hidden = false;
     window_blurred = false; // when hiding a window, also blur is called --> needs reversing
   }
-  //needs to be at the end (because hiding first calls blur --> blur attribute is true when hidden)
+  //needs to be at the end (because minimizing or hiding first calls blur --> blur attribute is true)
   else if(window_blurred) {
     mainWindow.focus();
     window_blurred = false;

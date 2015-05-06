@@ -4,7 +4,9 @@ var mainWindow = gui.Window.get();
 var tray = new gui.Tray({ title: 'Todoist', icon: 'assets/icon.png' });
 
 var menu = new gui.Menu();
+var showItem = new gui.MenuItem({ type: 'normal', label: 'Show'});
 var exitItem = new gui.MenuItem({ type: 'normal', label: 'Exit' });
+menu.append(showItem);
 menu.append(exitItem);
 tray.menu = menu;
 
@@ -107,7 +109,7 @@ view.addEventListener('load', function () {
   redirectLink(winFrame);
 });
 
-tray.on('click', function() {
+setVisible = function() {
   if(window_minimized) {
     mainWindow.restore();
     window_minimized = false;
@@ -119,6 +121,10 @@ tray.on('click', function() {
   else {
     mainWindow.focus();
   }
+};
+
+tray.on('click', function() {
+  setVisible();
 });
 
 mainWindow.on('minimize', function() {
@@ -129,6 +135,10 @@ mainWindow.on('close', function() {
   this.hide();
   window_hidden = true;
 });
+
+showItem.click = function() {
+    setVisible();
+};
 
 exitItem.click = function() {
   if(!window_hidden) {

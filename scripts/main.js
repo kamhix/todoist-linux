@@ -4,11 +4,14 @@ var mainWindow = gui.Window.get();
 var tray = new gui.Tray({ title: 'Todoist', icon: 'assets/icon.png' });
 
 var menu = new gui.Menu();
+var showHideItem = new gui.MenuItem({ type: 'normal', label: 'Show/Hide'});
 var exitItem = new gui.MenuItem({ type: 'normal', label: 'Exit' });
+menu.append(showHideItem);
 menu.append(exitItem);
 tray.menu = menu;
 
 var window_minimized = false;
+var window_blurred = false;
 var window_hidden = false;
 
 var view = document.getElementById('view');
@@ -107,28 +110,48 @@ view.addEventListener('load', function () {
   redirectLink(winFrame);
 });
 
-tray.on('click', function() {
+changeWindowState = function() {
   if(window_minimized) {
     mainWindow.restore();
     window_minimized = false;
+    window_blurred = false; // when minimizing a window, also blur is called --> needs reversing
   }
   else if(window_hidden) {
     mainWindow.show();
     window_hidden = false;
+    window_blurred = false; // when hiding a window, also blur is called --> needs reversing
+  }
+  //needs to be at the end (because minimizing or hiding first calls blur --> blur attribute is true)
+  else if(window_blurred) {
+    mainWindow.focus();
+    window_blurred = false;
   }
   else {
-    mainWindow.focus();
+    mainWindow.hide();
+    window_hidden = true;
   }
+};
+
+tray.on('click', function() {
+  changeWindowState();
 });
 
 mainWindow.on('minimize', function() {
   window_minimized = true;
 });
 
+mainWindow.on('blur', function() {
+  window_blurred = true;
+});
+
 mainWindow.on('close', function() {
   this.hide();
   window_hidden = true;
 });
+
+showHideItem.click = function() {
+    changeWindowState();
+};
 
 exitItem.click = function() {
   if(!window_hidden) {

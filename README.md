@@ -10,7 +10,7 @@ some scripts to improve the user experience (Ex: Loader).
 
 ## Download
 
-Todoist is already available for download on http://todoistlinux.kamhix.com.
+Todoist is already available for download on http://todoistlinux.hakimouake.com.
 
 ## Run it yourself
 

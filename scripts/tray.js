@@ -1,7 +1,12 @@
-var tray = new gui.Tray({
-  title: 'Todoist Linux',
-  icon: 'assets/icon.png'
-});
+var createTray = function () {
+  if (trayCreated) {
+    return;
+  }
+
+  var tray = new nw.Tray({
+    title: 'Todoist Linux',
+    icon: 'assets/icon.png'
+  });
 
   var menuWithShow = new nw.Menu();
   var menuWithHide = new nw.Menu();
@@ -29,26 +34,27 @@ var tray = new gui.Tray({
     }
   });
 
-menuWithShow.append(showMenuItem);
-menuWithShow.append(quitMenuItem);
+  menuWithShow.append(showMenuItem);
+  menuWithShow.append(quitMenuItem);
 
-menuWithHide.append(hideMenuItem);
-menuWithHide.append(quitMenuItem);
+  menuWithHide.append(hideMenuItem);
+  menuWithHide.append(quitMenuItem);
 
-tray.menu = menuWithHide;
+  tray.menu = menuWithHide;
 
-mainWindow.on('minimize', function() {
-  this.hide();
-  tray.menu = menuWithShow;
-  mainWindowVisible = false;
-});
+  mainWindow.on('minimize', function() {
+    this.hide();
+    tray.menu = menuWithShow;
+    mainWindowVisible = false;
+  });
 
-tray.on('click', function() {
-  if (!mainWindowVisible) {
-    tray.menu = menuWithHide;
-    mainWindow.show();
-    mainWindowVisible = true;
-  } else {
-    mainWindow.minimize();
-  }
-});
+  tray.on('click', function() {
+    if (!mainWindowVisible) {
+      tray.menu = menuWithHide;
+      mainWindow.show();
+      mainWindowVisible = true;
+    } else {
+      mainWindow.minimize();
+    }
+  });
+};

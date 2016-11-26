@@ -6,3 +6,8 @@ mainWindow.on('close', function () {
   this.hide();
   this.close(true);
 });
+
+mainWindow.on('loaded', function () {
+  createTray();
+  trayCreated = true;
+});

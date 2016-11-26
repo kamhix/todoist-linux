@@ -1,29 +1,6 @@
 var view = document.getElementById('view');
 var loader = document.querySelector('.loader');
-
-var checkLink = function (e) {
-  var link;
-
-  if (e.target.nodeName === 'A') {
-    link = e.target;
-  } else if (e.target.parentNode.nodeName === 'A') {
-    link = e.target.parentNode;
-  }
-
-
-  if (link && link.href !=='' && !link.href.endsWith('#') &&
-      !link.href.startsWith('https://todoist.com/app')) {
-    e.preventDefault();
-    gui.Shell.openExternal(link.href);
-  }
-};
-
-var redirectLink = function (winFrame) {
-
-  var links = winFrame.document.querySelectorAll('a');
-
-  winFrame.addEventListener('click', checkLink);
-};
+var originalHref = 'https://todoist.com/app';
 
 view.addEventListener('load', function () {
   var winFrame = this.contentWindow;
@@ -53,5 +30,5 @@ view.addEventListener('load', function () {
 
       return win;
     });
-  redirectLink(winFrame);
+  };
 });

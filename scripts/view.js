@@ -26,7 +26,6 @@ var redirectLink = function (winFrame) {
 };
 
 view.addEventListener('load', function () {
-
   var winFrame = this.contentWindow;
 
   if (winFrame.location.href === 'https://todoist.com/seeYou') {
@@ -40,25 +39,19 @@ view.addEventListener('load', function () {
   };
 
   winFrame.popup = function (url, title, w, h) {
-
-    var oldHref = window.location.href;
-
-    var win = gui.Window.open(url, {
-      toolbar: false,
+    nw.Window.open(url, {
       position: 'center',
       title: title,
       width: w,
       height: h
+    }, function (win) {
+      win.on('close', function() {
+        this.hide();
+        this.close(true);
+        winFrame.location.href = originalHref;
+      });
+
+      return win;
     });
-
-    win.on('close', function() {
-      this.hide();
-      this.close();
-      window.location.href = oldHref;
-    });
-
-    return win;
-  }
-
   redirectLink(winFrame);
 });

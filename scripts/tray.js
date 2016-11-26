@@ -3,31 +3,31 @@ var tray = new gui.Tray({
   icon: 'assets/icon.png'
 });
 
-var menuWithShow = new gui.Menu();
-var menuWithHide = new gui.Menu();
+  var menuWithShow = new nw.Menu();
+  var menuWithHide = new nw.Menu();
 
-var quitMenuItem = new gui.MenuItem({
-  label: 'Quit',
-  click: function () {
-    mainWindow.close();
-  }
-});
+  var quitMenuItem = new nw.MenuItem({
+    label: 'Quit',
+    click: function () {
+      mainWindow.close();
+    }
+  });
 
-var showMenuItem = new gui.MenuItem({
-  label: 'Show',
-  click: function () {
-    tray.menu = menuWithHide;
-    mainWindow.show();
-    mainWindowVisible = true;
-  }
-});
+  var showMenuItem = new nw.MenuItem({
+    label: 'Show',
+    click: function () {
+      tray.menu = menuWithHide;
+      mainWindow.show();
+      mainWindowVisible = true;
+    }
+  });
 
-var hideMenuItem = new gui.MenuItem({
-  label: 'Hide',
-  click: function () {
-    mainWindow.minimize();
-  }
-});
+  var hideMenuItem = new nw.MenuItem({
+    label: 'Hide',
+    click: function () {
+      mainWindow.minimize();
+    }
+  });
 
 menuWithShow.append(showMenuItem);
 menuWithShow.append(quitMenuItem);

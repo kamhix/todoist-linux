@@ -13,6 +13,8 @@ mainWindow.on('loaded', function () {
 });
 
 mainWindow.on('new-win-policy', function (frame, url, policy) {
-  policy.ignore();
-  nw.Shell.openExternal(url);
+  if (!url.startsWith('https://accounts.google.com')) {
+    policy.ignore();
+    nw.Shell.openExternal(url);
+  }
 });

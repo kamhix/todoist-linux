@@ -16,19 +16,21 @@ view.addEventListener('load', function () {
   };
 
   winFrame.popup = function (url, title, w, h) {
-    nw.Window.open(url, {
-      position: 'center',
-      title: title,
-      width: w,
-      height: h
-    }, function (win) {
-      win.on('close', function() {
-        this.hide();
-        this.close(true);
-        winFrame.location.href = originalHref;
-      });
+    var left = parseInt((screen.availWidth/2)-(w/2));
+    var top = parseInt((screen.availHeight/2)-(h/2));
+    var w_str = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no,';
+    w_str += 'width='+w+', height='+h+', top='+top+', left='+left;
+    w_str += 'screenX='+left+',screenY='+top;
 
-      return win;
-    });
+    var win = winFrame.open(url, title, w_str);
+
+    window.GPLUS_TIMER = setInterval(function() {
+        if(win && win.closed) {
+          clearTimeout(window.GPLUS_TIMER);
+          winFrame.location.href = originalHref;
+        }
+    }, 200);
+
+    return win;
   };
 });

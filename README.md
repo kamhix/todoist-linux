@@ -18,7 +18,7 @@ if you want to run it by yourself, please follow the following instructions.
 
 ### Clone the repo
 
-    $ git clone git@github.com:kamhix/todoist-linux.git
+    $ git clone https://github.com/kamhix/todoist-linux.git
     $ cd todoist-linux
 
 ### Install nw.js

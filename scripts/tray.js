@@ -14,7 +14,7 @@ var createTray = function () {
   var quitMenuItem = new nw.MenuItem({
     label: 'Quit',
     click: function () {
-      mainWindow.close();
+      mainWindow.close(true);
     }
   });
 
@@ -30,7 +30,9 @@ var createTray = function () {
   var hideMenuItem = new nw.MenuItem({
     label: 'Hide',
     click: function () {
-      mainWindow.minimize();
+      tray.menu = menuWithShow
+      mainWindow.hide();
+      mainWindowVisible = false;
     }
   });
 
@@ -42,7 +44,7 @@ var createTray = function () {
 
   tray.menu = menuWithHide;
 
-  mainWindow.on('minimize', function() {
+  mainWindow.on('close', function() {
     this.hide();
     tray.menu = menuWithShow;
     mainWindowVisible = false;
@@ -53,8 +55,6 @@ var createTray = function () {
       tray.menu = menuWithHide;
       mainWindow.show();
       mainWindowVisible = true;
-    } else {
-      mainWindow.minimize();
     }
   });
 };

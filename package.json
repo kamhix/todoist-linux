@@ -4,7 +4,12 @@
   "description": "A Linux desktop client for todoist",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "build --tasks linux-x86,linux-x64 --mirror https://dl.nwjs.io/ .",
+    "start": "run --x64 --mirror https://dl.nwjs.io/ ."
+  },
+  "build": {
+    "nwVersion": "0.25.4"
   },
   "repository": "",
   "keywords": [
@@ -26,5 +31,8 @@
     "page-cache": true
   },
   "author": "kamhix <kimly02@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nwjs-builder-phoenix": "^1.14.6"
+  }
 }

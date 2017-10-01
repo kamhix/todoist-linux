@@ -5,3 +5,4 @@ nw.pak
 nwjc
 libffmpegsumo.so
 *.dat
+node_modules

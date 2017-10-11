@@ -36,10 +36,24 @@ var createTray = function () {
     }
   });
 
+  var startup_minimized = (localStorage.startup_minimized === 'true');
+
+  var startupMenuItem = new nw.MenuItem({
+    label: 'Hide on startup',
+    type: 'checkbox',
+    checked: startup_minimized,
+    click: function () {
+      startup_minimized = !startup_minimized;
+      localStorage.startup_minimized = startup_minimized;
+    }
+  });
+
   menuWithShow.append(showMenuItem);
+  menuWithShow.append(startupMenuItem);
   menuWithShow.append(quitMenuItem);
 
   menuWithHide.append(hideMenuItem);
+  menuWithHide.append(startupMenuItem);
   menuWithHide.append(quitMenuItem);
 
   tray.menu = menuWithHide;
@@ -57,4 +71,12 @@ var createTray = function () {
       mainWindowVisible = true;
     }
   });
+
+  // hide app window on startup if settings allow
+  if (startup_minimized) {
+    tray.menu = menuWithShow
+    mainWindow.hide();
+    mainWindowVisible = false;
+  }
+
 };

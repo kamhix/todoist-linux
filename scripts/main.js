@@ -7,10 +7,8 @@ mainWindow.on('close', function () {
 });
 
 mainWindow.on('loaded', function () {
-  if (!trayCreated) {
-    createTray();
-    trayCreated = true;
-  }
+  createTray();
+  trayCreated = true;
 });
 
 mainWindow.on('new-win-policy', function (frame, url, policy) {

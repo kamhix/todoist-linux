@@ -8,9 +8,6 @@ var createTray = function () {
     icon: 'assets/icon.png'
   });
 
-  var menuWithShow = new nw.Menu();
-  var menuWithHide = new nw.Menu();
-
   var quitMenuItem = new nw.MenuItem({
     label: 'Quit',
     click: function () {
@@ -18,43 +15,55 @@ var createTray = function () {
     }
   });
 
-  var showMenuItem = new nw.MenuItem({
-    label: 'Show',
+  var showHideMenuItem = new nw.MenuItem({
+    label: 'Show / Hide',
     click: function () {
-      tray.menu = menuWithHide;
-      mainWindow.show();
-      mainWindowVisible = true;
+      if (mainWindowVisible) {
+        hideAppWin();
+      } else {
+        showAppWin();
+      }
     }
   });
 
-  var hideMenuItem = new nw.MenuItem({
-    label: 'Hide',
+  var startupMenuItem = new nw.MenuItem({
+    label: 'Start minimized',
+    type: 'checkbox',
+    checked: startup_minimized,
     click: function () {
-      tray.menu = menuWithShow
-      mainWindow.hide();
-      mainWindowVisible = false;
+      startup_minimized = !startup_minimized;
+      localStorage.startup_minimized = startup_minimized;
     }
   });
 
-  menuWithShow.append(showMenuItem);
-  menuWithShow.append(quitMenuItem);
+  var menu = new nw.Menu();
+  menu.append(showHideMenuItem);
+  menu.append(startupMenuItem);
+  menu.append(quitMenuItem);
+  tray.menu = menu;
 
-  menuWithHide.append(hideMenuItem);
-  menuWithHide.append(quitMenuItem);
+  var showAppWin = function () {
+    mainWindow.show();
+    mainWindowVisible = true;
+  }
 
-  tray.menu = menuWithHide;
+  var hideAppWin = function () {
+    mainWindow.hide();
+    mainWindowVisible = false;
+  }
 
   mainWindow.on('close', function() {
-    this.hide();
-    tray.menu = menuWithShow;
-    mainWindowVisible = false;
+    hideAppWin();
   });
 
   tray.on('click', function() {
     if (!mainWindowVisible) {
-      tray.menu = menuWithHide;
-      mainWindow.show();
-      mainWindowVisible = true;
+      showAppWin();
     }
   });
+
+  if (startup_minimized) {
+    hideAppWin();
+  }
+
 };

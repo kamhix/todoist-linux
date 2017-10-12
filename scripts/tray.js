@@ -27,7 +27,7 @@ var createTray = function () {
   });
 
   var startupMenuItem = new nw.MenuItem({
-    label: 'Start up minimized',
+    label: 'Start minimized',
     type: 'checkbox',
     checked: startup_minimized,
     click: function () {

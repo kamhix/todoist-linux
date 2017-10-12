@@ -2,6 +2,9 @@ var mainWindow = nw.Window.get();
 var mainWindowVisible = true;
 var trayCreated = false;
 
+// get startup preference setting from local storage
+var startup_minimized = (localStorage.startup_minimized === 'true');
+
 mainWindow.on('close', function () {
   this.hide();
 });

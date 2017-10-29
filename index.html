@@ -3,14 +3,63 @@
   <head>
     <title>Todoist</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+    <script type="text/javascript" src="scripts/mousetrap.js"></script>
+    <script type="text/javascript" src="scripts/mousetrap-record.js"></script>
   </head>
   <body>
     <div class="loader">
       <img src="assets/icon_transp.png" alt="Loading" class="logo">
     </div>
+    <div id="shortcut-panel">
+      <div class="float-right pt-3 pr-3">
+        <img id="shortcut-panel-close-btn" class="img-fluid icon-delete-row" src="assets/remove_2.png">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 pt-5">
+            <h3 class="pb-3">Shorcuts</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Shortcut</th><th>Action</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="shortcutList">
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6 pt-5">
+            <h3 class="pb-3">Add a new one</h3>
+            <form id="formShorcutAdd">
+              <div class="form-group">
+                <label class="shortcut-key">Shortcut</label>
+                <input type="text" class="form-control" id="shortcutKey" readonly>
+                <button type="button" id="recordBtn" class="btn btn-block btn-secondary mt-2">Start recording</button>
+              </div>
+              <div class="form-group">
+                <label class="shortcut-action">Action</label>
+                <select class="form-control" id="shortcutAction">
+                  <option value="show-todoist">Show Todoist</option>
+                  <option value="add-task">Add Task</option>
+                  <option value="search">Search</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-block" value="Add">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <iframe id="view" src="https://todoist.com/app" nwdisable nwfaketop></iframe>
+    <script type="text/javascript" src="scripts/util.js"></script>
     <script type="text/javascript" src="scripts/tray.js"></script>
+    <script type="text/javascript" src="scripts/shortcut.js"></script>
+    <script type="text/javascript" src="scripts/menu.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
     <script type="text/javascript" src="scripts/view.js"></script>
   </body>

@@ -14,6 +14,8 @@ var createTray = function () {
   var quitMenuItem = new nw.MenuItem({
     label: 'Quit',
     click: function () {
+      tray.remove();
+      tray = null;
       mainWindow.close(true);
     }
   });

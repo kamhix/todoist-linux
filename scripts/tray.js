@@ -57,6 +57,10 @@ var createTray = function () {
       tray.menu = menuWithHide;
       mainWindow.show();
       mainWindowVisible = true;
+    } else {
+      tray.menu = menuWithShow;
+      mainWindow.hide();
+      mainWindowVisible = false;
     }
   });
 };

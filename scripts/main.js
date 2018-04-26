@@ -11,5 +11,6 @@ mainWindow.on('close', function () {
 
 mainWindow.on('loaded', function () {
   initShortcutSetting();
+  registerZoomShortcut(mainWindow);
   trayCreated = true;
 });

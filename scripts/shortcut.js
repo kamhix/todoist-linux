@@ -106,7 +106,11 @@ var registerShortcut = function (key, action) {
   nw.App.registerGlobalHotKey(new nw.Shortcut({
     key : key.replace('meta', 'command'),
     active: function() {
-      doAction(action);
+      if (typeof action == 'string') {
+        doAction(action);
+      } else {
+        action();
+      }
     },
     failed: function(msg) {
       console.log(msg);
@@ -123,6 +127,27 @@ var registerShortcuts = function () {
     }
   });
 };
+
+var registerZoomShortcut = function (mainWindow) {
+  registerShortcut('Ctrl+Numpad0', function () {
+    mainWindow.zoomLevel = 0;
+  });
+  registerShortcut('Ctrl+Digit0', function () {
+    mainWindow.zoomLevel = 0;
+  });
+  registerShortcut('Ctrl+NumpadSubtract', function () {
+    mainWindow.zoomLevel -= 0.2;
+  });
+  registerShortcut('Ctrl+Minus', function () {
+    mainWindow.zoomLevel -= 0.2;
+  });
+  registerShortcut('Ctrl+NumpadAdd', function () {
+    mainWindow.zoomLevel += 0.2;
+  });
+  registerShortcut('Ctrl+Shift+Equal', function () {
+    mainWindow.zoomLevel += 0.2;
+  });
+}
 
 var initShortcutSetting = function () {
   var recordBtn = document.getElementById('recordBtn');

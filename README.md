@@ -6,11 +6,17 @@ Todoist Linux is an unofficial desktop application of Todoist.
 It provides Linux users access to the Todoist without using a web browser.
 It offers every features of the web version of Todoist including notifications.
 It use nwjs to embed the web version in a window container and
-some scripts to improve the user experience (Ex: Loader).
+some scripts to improve the user experience like loader, shortcuts, etc...
+
+## Features
+
+⋅⋅* Hide To Tray
+⋅⋅* Shortcuts
+⋅⋅* Zoom
 
 ## Download
 
-Todoist is already available for download on http://todoistlinux.hakimouake.com.
+Todoist Linux is available for download via the [releases](https://github.com/kamhix/todoist-linux/releases) .
 
 ## Run it yourself
 
@@ -21,11 +27,22 @@ if you want to run it by yourself, please follow the following instructions.
     $ git clone https://github.com/kamhix/todoist-linux.git
     $ cd todoist-linux
 
-### Install nw.js
+### Install nodejs
 
-Please download the lastest version of nw.js at https://github.com/nwjs/nw.js
-and follow the installation guide.
+    Follow instructions to install nodejs and npm.
+
+### Install gulp
+
+    $ npm install gulp-cli -g
+
+### Install Dev Dependencies
+
+    $ npm install
 
 ### Run project
 
-    $ nw .
+    $ gulp start
+
+### Build project
+    
+    $ gulp package

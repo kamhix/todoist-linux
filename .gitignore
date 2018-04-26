@@ -7,3 +7,5 @@ libffmpegsumo.so
 *.dat
 node_modules
 npm-debug.log
+dist
+tar

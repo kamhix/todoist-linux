@@ -1,5 +1,5 @@
 {
-  "name": "Todoist",
+  "name": "todoist",
   "version": "0.5.0",
   "description": "A Linux desktop client for todoist",
   "main": "index.html",
@@ -35,6 +35,13 @@
   "author": "kamhix <kimly02@gmail.com",
   "license": "MIT",
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-chmod": "^2.0.0",
+    "gulp-gzip": "^1.4.2",
+    "gulp-npm-run": "0.0.3",
+    "gulp-run-command": "0.0.9",
+    "gulp-tap": "^1.0.1",
+    "gulp-tar": "^2.1.0",
     "nwjs-builder-phoenix": "^1.14.6"
   }
 }

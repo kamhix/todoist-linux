@@ -27,7 +27,7 @@
     "position": "center",
     "width": 800,
     "height": 600,
-    "icon": "assets/icon.png"
+    "icon": "./assets/icon-128.png"
   },
   "webkit": {
     "page-cache": true

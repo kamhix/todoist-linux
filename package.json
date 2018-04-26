@@ -1,6 +1,6 @@
 {
   "name": "Todoist",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "A Linux desktop client for todoist",
   "main": "index.html",
   "scripts": {

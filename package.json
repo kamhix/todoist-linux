@@ -9,6 +9,8 @@
     "start": "run --x64 --mirror https://dl.nwjs.io/ ."
   },
   "build": {
+    "appId": "com.hakimouake.todoistlinux",
+    "packed": true,
     "nwVersion": "0.25.4"
   },
   "repository": "",

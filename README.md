@@ -11,8 +11,8 @@ some scripts to improve the user experience like loader, shortcuts, etc...
 ## Features
 
 ⋅⋅* Hide To Tray
-⋅⋅* Shortcuts
-⋅⋅* Zoom
+⋅⋅* Global Shortcuts
+⋅⋅* Zoom (Shortcut with Ctrl + + to zoom, Ctrl + - to unzoom, Ctrl + 0 to reset)
 
 ## Download
 

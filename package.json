@@ -35,13 +35,13 @@
   "author": "kamhix <kimly02@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-chmod": "^2.0.0",
+    "gulp": "^4.0.2",
+    "gulp-chmod": "^3.0.0",
     "gulp-gzip": "^1.4.2",
     "gulp-npm-run": "0.0.3",
     "gulp-run-command": "0.0.9",
-    "gulp-tap": "^1.0.1",
-    "gulp-tar": "^2.1.0",
-    "nwjs-builder-phoenix": "^1.14.6"
+    "gulp-tap": "^2.0.0",
+    "gulp-tar": "^3.0.1",
+    "nwjs-builder-phoenix": "^1.15.0"
   }
 }

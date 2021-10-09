@@ -9,6 +9,8 @@ var addMenu = function (mainWindow) {
   
   zoommenu.append(new nw.MenuItem({ 
     label: 'Reset', 
+    key: '0',  
+    modifiers: 'ctrl',
     click: function () {
       mainWindow.zoomLevel = 0;
     } 
@@ -16,6 +18,8 @@ var addMenu = function (mainWindow) {
   
   zoommenu.append(new nw.MenuItem({ 
     label: 'Zoom -', 
+    key: '-',  
+    modifiers: 'ctrl',
     click: function () {
       mainWindow.zoomLevel -= 0.2;
     } 
@@ -23,6 +27,8 @@ var addMenu = function (mainWindow) {
   
   zoommenu.append(new nw.MenuItem({ 
     label: 'Zoom +', 
+    key: '=',  
+    modifiers: 'ctrl',
     click: function () {
       mainWindow.zoomLevel += 0.2;
     } 

@@ -128,27 +128,6 @@ var registerShortcuts = function () {
   });
 };
 
-var registerZoomShortcut = function (mainWindow) {
-  registerShortcut('Ctrl+Numpad0', function () {
-    mainWindow.zoomLevel = 0;
-  });
-  registerShortcut('Ctrl+Digit0', function () {
-    mainWindow.zoomLevel = 0;
-  });
-  registerShortcut('Ctrl+NumpadSubtract', function () {
-    mainWindow.zoomLevel -= 0.2;
-  });
-  registerShortcut('Ctrl+Minus', function () {
-    mainWindow.zoomLevel -= 0.2;
-  });
-  registerShortcut('Ctrl+NumpadAdd', function () {
-    mainWindow.zoomLevel += 0.2;
-  });
-  registerShortcut('Ctrl+Shift+Equal', function () {
-    mainWindow.zoomLevel += 0.2;
-  });
-}
-
 var initShortcutSetting = function () {
   var recordBtn = document.getElementById('recordBtn');
   var shortcutKey = document.getElementById('shortcutKey');
